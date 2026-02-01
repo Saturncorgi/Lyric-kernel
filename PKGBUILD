@@ -38,10 +38,10 @@ source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   https://github.com/archlinux/linux/releases/download/$_srctag/linux-$_srctag.patch.zst{,.sig}
   https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config  # the main kernel config file
-  https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/master/logo.patch{,.sig}
-  https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/master/config.p{,.sig}
-  https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/master/lyric.hook{,.sig}
-  https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/master/lyric-hook.sh{,.sig}
+  https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/logo.patch{,.sig}
+  https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/config.p{,.sig}
+  https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/lyric.hook{,.sig}
+  https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/lyric-hook.sh{,.sig}
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
