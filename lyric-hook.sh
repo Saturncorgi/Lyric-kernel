@@ -20,5 +20,5 @@ diff PKGBUILD.old PKGBUILD
 echo "Starting build..."
 USER="$(cat /etc/lyric-kernel/user.txt)" 
 find .  -not -name '*PKGBUILD*' -not -path '*.git*' -not -name '.' -not -name 'src' -not -name 'sign.sh' -print0|xargs -0 rm --
-updpkgsums
+sudo -u "$USER" updpkgsums
 sudo -u "$USER" makepkg -C -fcs
