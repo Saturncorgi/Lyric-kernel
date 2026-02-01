@@ -1,0 +1,11 @@
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Type=Package
+Target=linux
+
+[Action]
+When=PostTransaction
+Exec=/etc/pacman.d/hooks.bin/lyric-hook.sh
+NeedsTargets
+
