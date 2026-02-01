@@ -2,3 +2,4 @@ config
 linux-*
 src
 pkg
+lyric-kernel*
