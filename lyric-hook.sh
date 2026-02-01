@@ -16,6 +16,5 @@ rm temp.tmp
 diff PKGBUILD.old PKGBUILD
 echo "Starting build..."
 USER="$(cat /etc/lyric-kernel/user.txt)" 
-rm -rf src
-find .  -not -name '*PKGBUILD*' -not -path '*.git*' -not -name '.' -print0|xargs -0 rm --
+find .  -not -name '*PKGBUILD*' -not -path '*.git*' -not -name '.' -not -name 'src' -print0|xargs -0 rm --
 sudo -u "$USER" makepkg -C -fcs
