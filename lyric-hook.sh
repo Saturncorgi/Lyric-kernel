@@ -6,6 +6,7 @@ cd ..
 cp PKGBUILD PKGBUILD.old
 rm PKGBUILD
 curl https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/PKGBUILD > PKGBUILD
+chmod 666 PKGBUILD
 count=0;
 for str in $(curl https://api.github.com/repos/archlinux/linux/tags -s|grep name); do
 	if [ "$count" = "1" ];then
@@ -18,5 +19,6 @@ rm temp.tmp
 diff PKGBUILD.old PKGBUILD
 echo "Starting build..."
 USER="$(cat /etc/lyric-kernel/user.txt)" 
-find .  -not -name '*PKGBUILD*' -not -path '*.git*' -not -name '.' -not -name 'src' -print0|xargs -0 rm --
+find .  -not -name '*PKGBUILD*' -not -path '*.git*' -not -name '.' -not -name 'src' -not -name 'sign.sh' -print0|xargs -0 rm --
+updpkgsums
 sudo -u "$USER" makepkg -C -fcs
