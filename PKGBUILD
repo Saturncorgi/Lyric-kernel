@@ -1,7 +1,7 @@
 # Maintainer: Lyra  <lyra@saturncorgi.com>
 
 pkgbase=lyric-kernel
-pkgver=6.18.7.arch1
+pkgver=7.0.6.arch1
 pkgrel=1
 pkgdesc='Linux but tux is trans'
 url='https://github.com/Saturncorgi/Lyric-kernel'
@@ -37,7 +37,7 @@ _srctag=v${pkgver%.*}-${pkgver##*.}
 source=(
   https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
   https://github.com/archlinux/linux/releases/download/$_srctag/linux-$_srctag.patch.zst{,.sig}
-  https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config  # the main kernel config file
+  https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/main/config.x86_64  # the main kernel config file
   https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/logo.patch{,.sig}
   https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/config.p{,.sig}
   https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/lyric.hook{,.sig}
@@ -50,27 +50,27 @@ validpgpkeys=(
   96244C1D0A5FDD46A331BC86779AF29DE2EA127E  # Lyra
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('b726a4d15cf9ae06219b56d87820776e34d89fbc137e55fb54a9b9c3015b8f1e'
+sha256sums=('cba44440aa57affd7c21241dc5bc234b0df53c499f8ffc3ebc290dd3390a7523'
             'SKIP'
-            '57c22879f2228398564091db2ec9b186acbd56dfb0e1072f83418bfdd3829aae'
+            'cf3f8e6dc3c71a25e3f76ede780d0653d73b3d13f224f52350eb6d2e51d1b6f4'
             'SKIP'
-            '505d823490e964e66ebe5889a3701347b4e4e2faf1772b3964f0360a176eadf8'
+            '9fb185362b3b01ab71b8da11057bc0bd4b6e4526d6be770e62bf70eaf118232a'
             'e04e1a948ac0f43d0d44c60a684fd349115b2656f9c97ae87a84b08a81630b55'
             'SKIP'
-            'cb0d5ac2dc724374725acbb70c421d2849ae0d8c1ed86f8cb3f17f2cc3cbb889'
+            '7b1d4e783270d4abb5e443881744b5e92ff2c8dd772b911583cf4ccc423b4906'
             'SKIP'
             'f5bb4825c0175255911156bbbd9740da700fe856efe15f0406ea38781b7de872'
             'SKIP'
             'e6da66e7ae71266f9c67f2e2187990ba6bb30ecc517687f2c7bd971fcf95dfbf'
             'SKIP')
-b2sums=('3ad31b9b36ea2c8f865c87e63c97a4e7b6684abee35ae71d5838026de9f476edb4c847adab315235293c5f37f8f3b90799ae2b3d41915716710eae63acbf6863'
+b2sums=('0e8640c77249b251b22f162b8eb21d062308c4a5d16e3942882fbfbbb50a3ac981ad14db8e5612fb9e0a26f8f3a2c6bb07f0309e26ea59323430f780d22b2821'
         'SKIP'
-        '8ece2f1b2fc6530cdd65e597141550c184089a206b9aa49cb9e46d61d2e7cf9c3f07f35ed523670d892aa7e62626644a5b1e98dd9c6acd824cb7ad3254c17665'
+        '21900beb3994169ee9bc82842f4f663ee22cce0117a05c1ae8b4fb62372e7bf47c37ed7cbd289f919c4afd0182ca35d33d6f0c5aeb6663ce3034c97cc71c089c'
         'SKIP'
-        'f31d83e1e10bb901d0d25c1db0ad2844584ff1014c8bf36f342fcf1999f41e5e2d5ddfa20a5a23d4626c6b35005c7e01ebe8ae7f3de3d4b61a189a49add3a158'
+        '74d7d779f0762352fc681258feda68f725032c1ab5cf436f7ea6be699d60404d2fb7a985d22d95a45b2acf77eef08b3aa8d23088ffec0db4dd7a7661a29cf3bc'
         '7193cbbcb43fdddd7d19ba8e947d238b27bdf5a2e603286b0ab83e8a47a22af2d6a0f10c95cf469fd38ea9e97382809c27f14e9302bbef5acbcde7db5b79f097'
         'SKIP'
-        '544b400f8ff8803b327c7d46662e47c580af72016208f131d8d65b2bf61f2c3a38dd0d7902e2891d98812e03ab114398d3fe4bc53153a773b56d33f838e2544e'
+        '99973b8471c3a6b56fbf9d03c5d7b53fdff4a0038a07de96faa4f8c6777a22583e86920641eee790d164650988adc34185f67ab213c633a8053cb01c36e2b067'
         'SKIP'
         '2332aa371fbf17e2860bf96cde3c2897ad36b06c30d55a2e3fa04c919c86fd1ce3e88892d5a2e7d3dae69c31fb3e09aa5863189c202a3822180ee6420767eb0b'
         'SKIP'
@@ -84,8 +84,8 @@ export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EP
 prepare() {
   whoami > user.txt
   echo $PWD > path.txt
+  mv config.x86_64 config
   cd $_srcname
-
   echo "Setting version..."
   echo "-$pkgrel" > localversion.10-pkgrel
   echo "${pkgbase#linux}" > localversion.20-pkgname
@@ -100,7 +100,7 @@ prepare() {
   done
   cd ..
   echo "Applying patching config"
-  patch  -i config.p --follow-symlinks
+  patch  -Ri config.p --follow-symlinks
   cd $_srcname
   echo "Setting config..."
   cp ../config .config
