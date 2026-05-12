@@ -7,12 +7,7 @@ cp PKGBUILD PKGBUILD.old
 rm PKGBUILD
 curl https://raw.githubusercontent.com/Saturncorgi/Lyric-kernel/refs/heads/main/PKGBUILD > PKGBUILD
 chmod 666 PKGBUILD
-count=0;
-for str in $(curl https://api.github.com/repos/archlinux/linux/tags -s|grep name); do
-	if [ "$count" = "1" ];then
-		version=$(echo "$str"|sed "s/\"//g"|sed "s/,//g"|sed "s/-/./"|sed "s/v//";)
-	fi; 
-	count=$((count+1));done
+version=curl https://kernel.org/ | hxselect td -s "\n"|grep strong|grep td|grep -v rc|head -1|sed "s|<td><strong>||"|sed "s|</strong></td>||"
 cat PKGBUILD|sed -r "s/^pkgver.*/pkgver=$version/" > temp.tmp
 cp temp.tmp PKGBUILD
 rm temp.tmp
