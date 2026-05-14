@@ -1,7 +1,7 @@
 # Maintainer: Lyra  <lyra@saturncorgi.com>
 
 pkgbase=lyric-kernel
-pkgver=7.0.6.arch1
+pkgver=7.0.7.arch1
 pkgrel=1
 pkgdesc='Linux but tux is trans'
 url='https://github.com/Saturncorgi/Lyric-kernel'
@@ -50,27 +50,27 @@ validpgpkeys=(
   96244C1D0A5FDD46A331BC86779AF29DE2EA127E  # Lyra
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('cba44440aa57affd7c21241dc5bc234b0df53c499f8ffc3ebc290dd3390a7523'
+sha256sums=('c8e1fe86a3aaff2de6f7401383f959283510c389ff84c15ab711c8fbceb25df4'
             'SKIP'
-            'cf3f8e6dc3c71a25e3f76ede780d0653d73b3d13f224f52350eb6d2e51d1b6f4'
+            '4a5fa687751890e3850cdbce18728de631877d0c9290d8a3b2a4fd164cf12c63'
             'SKIP'
-            '9fb185362b3b01ab71b8da11057bc0bd4b6e4526d6be770e62bf70eaf118232a'
+            'ca1fe1b2bea9c862ba9b2422e47dcae37b2fbd5f97b2fbd9fe8ff303e0126752'
             'e04e1a948ac0f43d0d44c60a684fd349115b2656f9c97ae87a84b08a81630b55'
             'SKIP'
-            '7b1d4e783270d4abb5e443881744b5e92ff2c8dd772b911583cf4ccc423b4906'
+            '09167224cab984e6f7651c8beb52c4a893aa7b1ed1c8ebdb7d16528f1a4270bb'
             'SKIP'
             'f5bb4825c0175255911156bbbd9740da700fe856efe15f0406ea38781b7de872'
             'SKIP'
             'db8f9a10459c76911ca046373f6457f599e8a25765c08f372167a3e0e97da842'
             'SKIP')
-b2sums=('0e8640c77249b251b22f162b8eb21d062308c4a5d16e3942882fbfbbb50a3ac981ad14db8e5612fb9e0a26f8f3a2c6bb07f0309e26ea59323430f780d22b2821'
+b2sums=('ae7214087a29d81c77b2351a4781ad248726f2e7b0a8ddb75790fd64825032d94ddb9526e979f0a41eb4b4da0bf76c63b1681e915c90f1706de7df0980c249f9'
         'SKIP'
-        '21900beb3994169ee9bc82842f4f663ee22cce0117a05c1ae8b4fb62372e7bf47c37ed7cbd289f919c4afd0182ca35d33d6f0c5aeb6663ce3034c97cc71c089c'
+        '26202ba5c3155fb045550a349c5f2d43b79848383bfc2052ba22157350327c1e4b8fd347adbe4f978820f26c49d078bdd438d3cf15ed6d8f6c304926dc086200'
         'SKIP'
-        '74d7d779f0762352fc681258feda68f725032c1ab5cf436f7ea6be699d60404d2fb7a985d22d95a45b2acf77eef08b3aa8d23088ffec0db4dd7a7661a29cf3bc'
+        '9644c05ccef1e7d251462cb5b0b8579e39e892f72b1ec390a030fc9b36d5a2888adb3442b6e1700ff4ca0c983921230822b75f243a7e5db082a2140297d6da83'
         '7193cbbcb43fdddd7d19ba8e947d238b27bdf5a2e603286b0ab83e8a47a22af2d6a0f10c95cf469fd38ea9e97382809c27f14e9302bbef5acbcde7db5b79f097'
         'SKIP'
-        '99973b8471c3a6b56fbf9d03c5d7b53fdff4a0038a07de96faa4f8c6777a22583e86920641eee790d164650988adc34185f67ab213c633a8053cb01c36e2b067'
+        '613f17c8c8a0bc6e523c945d7b59d1aa099c83b8ae80e89407c8dc440b74f64ed0f10b226d76b9eba4dd7de42b5b05e98142df3cc50d1975353290c57520ee67'
         'SKIP'
         '2332aa371fbf17e2860bf96cde3c2897ad36b06c30d55a2e3fa04c919c86fd1ce3e88892d5a2e7d3dae69c31fb3e09aa5863189c202a3822180ee6420767eb0b'
         'SKIP'
@@ -141,8 +141,8 @@ _package() {
   install -Dm644 -t "$pkgdir"/etc/$pkgbase user.txt
   install -Dm644 -t "$pkgdir"/etc/$pkgbase path.txt
   #Install hooks
-  install -Dm744 -t "$pkgdir"/etc/pacman.d/hooks/ ../lyric.hook
-  install -Dm744 -t "$pkgdir"/etc/pacman.d/hooks.bin/ ../lyric-hook.sh
+  #install -Dm744 -t "$pkgdir"/etc/pacman.d/hooks/ ../lyric.hook
+  #install -Dm744 -t "$pkgdir"/etc/pacman.d/hooks.bin/ ../lyric-hook.sh
   cd $_srcname
   local modulesdir="$pkgdir/usr/lib/modules/$(<version)"
 
