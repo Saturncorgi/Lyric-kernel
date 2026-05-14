@@ -1,5 +1,5 @@
 --- .config.old	2026-05-14 09:08:39.642176739 -0700
-+++ .config	2026-05-14 09:56:50.330966016 -0700
++++ .config	2026-05-14 10:00:39.155553147 -0700
 @@ -4846,6 +4846,7 @@
  CONFIG_SERIAL_UARTLITE_NR_UARTS=1
  CONFIG_SERIAL_CORE=y
@@ -84,6 +84,15 @@
  
  #
  # Lock Debugging (spinlocks, mutexes, etc...)
+@@ -12425,7 +12449,7 @@
+ # CONFIG_DEBUG_WW_MUTEX_SLOWPATH is not set
+ # CONFIG_DEBUG_RWSEMS is not set
+ # CONFIG_DEBUG_LOCK_ALLOC is not set
+-# CONFIG_DEBUG_ATOMIC_SLEEP is not set
++CONFIG_DEBUG_ATOMIC_SLEEP=y
+ # CONFIG_DEBUG_LOCKING_API_SELFTESTS is not set
+ # CONFIG_LOCK_TORTURE_TEST is not set
+ # CONFIG_WW_MUTEX_SELFTEST is not set
 @@ -12441,7 +12465,7 @@
  #
  # Debug kernel data structures
