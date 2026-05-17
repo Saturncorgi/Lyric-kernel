@@ -1,7 +1,7 @@
 # Maintainer: Lyra  <lyra@saturncorgi.com>
 
 pkgbase=lyric-kernel
-pkgver=7.0.7.arch1
+pkgver=7.0.8.arch1
 pkgrel=1
 pkgdesc='Linux but tux is trans'
 url='https://github.com/Saturncorgi/Lyric-kernel'
@@ -20,7 +20,8 @@ makedepends=(
   rust-src
   tar
   xz
-
+  distcc
+  ccache
   # htmldocs
   graphviz
   imagemagick
@@ -50,11 +51,11 @@ validpgpkeys=(
   96244C1D0A5FDD46A331BC86779AF29DE2EA127E  # Lyra
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('c8e1fe86a3aaff2de6f7401383f959283510c389ff84c15ab711c8fbceb25df4'
+sha256sums=('1945afb22c9f4f7c78d971210f3bbb7deb09f5d8c41a38bfac772de25f6dcb22'
             'SKIP'
-            '4a5fa687751890e3850cdbce18728de631877d0c9290d8a3b2a4fd164cf12c63'
+            'e2d13dc37abdd8ddb6b3e2767d2b8310c2342b56458d2cc73c414a9b50d767ab'
             'SKIP'
-            'ca1fe1b2bea9c862ba9b2422e47dcae37b2fbd5f97b2fbd9fe8ff303e0126752'
+            '3861f45a8f5803f2dd901e1c2293296b78f0142c802139040a5f0d040eefa594'
             'e04e1a948ac0f43d0d44c60a684fd349115b2656f9c97ae87a84b08a81630b55'
             'SKIP'
             '78735cf9f5515751be8d90175624ca387e7e7aa46ab453bed786efc02b997c2f'
@@ -63,11 +64,11 @@ sha256sums=('c8e1fe86a3aaff2de6f7401383f959283510c389ff84c15ab711c8fbceb25df4'
             'SKIP'
             'db8f9a10459c76911ca046373f6457f599e8a25765c08f372167a3e0e97da842'
             'SKIP')
-b2sums=('ae7214087a29d81c77b2351a4781ad248726f2e7b0a8ddb75790fd64825032d94ddb9526e979f0a41eb4b4da0bf76c63b1681e915c90f1706de7df0980c249f9'
+b2sums=('f608ac413f686d3d84ca7bb3d42fa96802e05a7fe8dd8ad6671bb26a8bd5202595cdbbaaee142f94fd9028ed2de832205523766673719960e20b5c0daebdae4b'
         'SKIP'
-        '26202ba5c3155fb045550a349c5f2d43b79848383bfc2052ba22157350327c1e4b8fd347adbe4f978820f26c49d078bdd438d3cf15ed6d8f6c304926dc086200'
+        '4d64f226336e535c04579cc41386c534ff71ff3653eee725c91ce2e7fc9e4e679b128ed9c40f6d63c85fc8345c7426f974ecb470413fa434507783c783e3ac7a'
         'SKIP'
-        '9644c05ccef1e7d251462cb5b0b8579e39e892f72b1ec390a030fc9b36d5a2888adb3442b6e1700ff4ca0c983921230822b75f243a7e5db082a2140297d6da83'
+        'c6260a3252fc2ffbefbb93389d03ee938e399be986eda24d00992b3834d7242e3866f05a3a07dde1da5c641fe737e0b0ff25159d1f31035b50e3923b4a671b4f'
         '7193cbbcb43fdddd7d19ba8e947d238b27bdf5a2e603286b0ab83e8a47a22af2d6a0f10c95cf469fd38ea9e97382809c27f14e9302bbef5acbcde7db5b79f097'
         'SKIP'
         '4a6f5fc064dda0bad30d8b64fe7e1242e4704f5d5bf0437f382a125a3ec71f1dd7e0be9649c65599a76204b73afb49a185e86057f02dcf935797d80edcc7d87e'
@@ -100,7 +101,7 @@ prepare() {
   done
   cd ..
   echo "Applying patching config"
-  patch  -Ri config.p --follow-symlinks
+  patch  -i config.p --follow-symlinks
   cd $_srcname
   echo "Setting config..."
   cp ../config .config
@@ -112,7 +113,8 @@ prepare() {
 
 build() {
   cd $_srcname
-  make all -j16
+  
+  CCACHE_PREFIX="distcc" KBUILD_BUILD_TIMESTAMP="Mon Oct 13 00:00:00 UTC 2025" nice make CC="ccache cc" all -j25
   make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1 -j16
 }
 
