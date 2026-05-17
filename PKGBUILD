@@ -114,7 +114,7 @@ prepare() {
 build() {
   cd $_srcname
   
-  CCACHE_PREFIX="distcc" KBUILD_BUILD_TIMESTAMP="Mon Oct 13 00:00:00 UTC 2025" nice make CC="ccache cc" all -j25
+  CCACHE_PREFIX="distcc" KBUILD_BUILD_TIMESTAMP="Fri May 15 00:00:00 UTC 2026" nice make CC="ccache cc" all -j25
   make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1 -j16
 }
 
