@@ -58,7 +58,7 @@ sha256sums=('e56c8356dda01136a6041c6ef832bd0ec99bd2d35dff97832aa5ec10ed014304'
             'f185d06b050a8fd0608189f7d53786734d802872f2c1eefc74196174bca5d094'
             'e04e1a948ac0f43d0d44c60a684fd349115b2656f9c97ae87a84b08a81630b55'
             'SKIP'
-            'e11167a82ef23aa5dd599a49a931d465fc7dcc2bac373a7b642803e8df6c34f2'
+            '00b951c6390d7759a7421a26386a6d1878e1c9cc4adac252ec888edbde6a1e9d'
             'SKIP'
             'f5bb4825c0175255911156bbbd9740da700fe856efe15f0406ea38781b7de872'
             'SKIP'
@@ -71,7 +71,7 @@ b2sums=('e198c4edf9cc681c602e4c0bd8d92ff9d93433c95a525d8d94e5ad59aa9da2299a50486
         '90dbd2917fac50d46a1bf3cd5c3997e3c4ae44cecafa042adeeae20c1b605ed1f0e5e85661bf9bc9b8320cdd477f147ee46109c8099d28bdaed900d894ce0a0d'
         '7193cbbcb43fdddd7d19ba8e947d238b27bdf5a2e603286b0ab83e8a47a22af2d6a0f10c95cf469fd38ea9e97382809c27f14e9302bbef5acbcde7db5b79f097'
         'SKIP'
-        'f47314872fab6a29ae9e3eeb33fa1b154132973fc1b2b17784742a4df720c0d2db53fa03280c7b5e6f8c5ac7ce7b74fcd2eb28032bb6d9a9f3ac009c59923eb5'
+        'c9ea33a926c8b06dde8f8a8759d2fd3e47c8d9937868ef865a2ec4eac4034c81ac83378269b1d15cf5eb9d59862f46f61b45bd0124fad8e158fa5e44ebaeaa4e'
         'SKIP'
         '2332aa371fbf17e2860bf96cde3c2897ad36b06c30d55a2e3fa04c919c86fd1ce3e88892d5a2e7d3dae69c31fb3e09aa5863189c202a3822180ee6420767eb0b'
         'SKIP'
@@ -116,7 +116,7 @@ build() {
   cd $_srcname
   
   nice make -j16
-  #CCACHE_PREFIX="distcc" KBUILD_BUILD_TIMESTAMP="Fri May 15 00:00:00 UTC 2026" nice make CC="ccache cc" all -j25
+  KBUILD_BUILD_TIMESTAMP="Fri Jun 12 00:00:00 UTC 2026" nice make -j16
   make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1 -j16
 }
 
