@@ -1,7 +1,7 @@
 # Maintainer: Lyra  <lyra@saturncorgi.com>
 
 pkgbase=lyric-kernel
-pkgver=7.0.11.arch1
+pkgver=7.0.12.arch1
 pkgrel=1
 pkgdesc='Linux but tux is trans'
 url='https://github.com/Saturncorgi/Lyric-kernel'
@@ -51,27 +51,27 @@ validpgpkeys=(
   96244C1D0A5FDD46A331BC86779AF29DE2EA127E  # Lyra
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('e56c8356dda01136a6041c6ef832bd0ec99bd2d35dff97832aa5ec10ed014304'
+sha256sums=('57edc9a41efc1ca6b797afa8f4a587a30da2af6bca7356eb56e1e1a4ada265da'
             'SKIP'
-            '694e74e08031d1388c0ae7ba3e44d9dfcb1888ed45ae1eb97f9c4160953042e5'
+            'ce38af1268931b099993cf01c537d6c3b21007e08cad84d2f1e71f95cc5cb75b'
             'SKIP'
             'f185d06b050a8fd0608189f7d53786734d802872f2c1eefc74196174bca5d094'
             'e04e1a948ac0f43d0d44c60a684fd349115b2656f9c97ae87a84b08a81630b55'
             'SKIP'
-            'c7a62a3ab1f9f465f165fac2f24ac3d691d4aae0fccc581ebd368cf447c4d32c'
+            '278820951e152b8a294f48e46cdbc9777eaaa23f2d11ab380e2b56dcb819b9a9'
             'SKIP'
             'f5bb4825c0175255911156bbbd9740da700fe856efe15f0406ea38781b7de872'
             'SKIP'
             'db8f9a10459c76911ca046373f6457f599e8a25765c08f372167a3e0e97da842'
             'SKIP')
-b2sums=('e198c4edf9cc681c602e4c0bd8d92ff9d93433c95a525d8d94e5ad59aa9da2299a5048690841263e925835e3960d621fab137afd3522020f58d4fe1a09041ac7'
+b2sums=('2c53f205a940b0f9f68653b92ef46d49f828cbef3cfa8cf94d050c8e6df05c4fcaa4f9b9681b9130b14e3c790d31208eb244d123249a93e35e8e6165f3d858c9'
         'SKIP'
-        '17d5fbaf51a1930dbacadcf3eacc286e471e44fd1526516b7fa51f7e83b62c9d24e69e1cf9c5c111288160964b8e44d1138306de2ebc84b242e33f09d6d6e13a'
+        '26230d1a111b24fe9239273acdfacda37c5bf009f861c448ad25392dcca433514246d629a077ce5c66478c7e0f4e5477ce5f95c91d08b3a02cc87bb35b849bcf'
         'SKIP'
         '90dbd2917fac50d46a1bf3cd5c3997e3c4ae44cecafa042adeeae20c1b605ed1f0e5e85661bf9bc9b8320cdd477f147ee46109c8099d28bdaed900d894ce0a0d'
         '7193cbbcb43fdddd7d19ba8e947d238b27bdf5a2e603286b0ab83e8a47a22af2d6a0f10c95cf469fd38ea9e97382809c27f14e9302bbef5acbcde7db5b79f097'
         'SKIP'
-        '2efc0354834cf5e958f12ea981849b0da7dadb0f6b0bb93a3d43fe8cf253282a3924e071ab52968874bf63ea13a389567ddf3146a68fec4910f1b79e75a63a33'
+        '4270ec08d803739f8ec36fb77e8041bebd79ca1ae06d6e7207c2c7a06cfb56c1373f7e4031aa0a15359a4c0f96a79993cff57472e0258a3a961827cf9b73889a'
         'SKIP'
         '2332aa371fbf17e2860bf96cde3c2897ad36b06c30d55a2e3fa04c919c86fd1ce3e88892d5a2e7d3dae69c31fb3e09aa5863189c202a3822180ee6420767eb0b'
         'SKIP'
@@ -115,8 +115,8 @@ prepare() {
 build() {
   cd $_srcname
   
-  nice make -j16
-  KBUILD_BUILD_TIMESTAMP="Fri Jun 12 00:00:00 UTC 2026" nice make -j16
+  #nice make -j16
+  KBUILD_BUILD_TIMESTAMP="Fri Jun 12 00:00:00 UTC 2026" KCFLAGS="-O3 -march=native -mtune=native -pipe" nice make -j16
   make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1 -j16
 }
 
@@ -210,8 +210,8 @@ _package-headers() {
   find . -name 'Kconfig*' -exec install -Dm644 {} "$builddir/{}" \;
 
   echo "Installing Rust files..."
-  install -Dt "$builddir/rust" -m644 rust/*.rmeta
-  install -Dt "$builddir/rust" rust/*.so
+  #install -Dt "$builddir/rust" -m644 rust/*.rmeta
+  #install -Dt "$builddir/rust" rust/*.so
 
   echo "Installing unstripped VDSO..."
   make INSTALL_MOD_PATH="$pkgdir/usr" vdso_install \
