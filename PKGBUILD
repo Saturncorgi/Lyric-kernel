@@ -116,7 +116,7 @@ build() {
   cd $_srcname
   
   #nice make -j16
-  KBUILD_BUILD_TIMESTAMP="Fri Jun 12 00:00:00 UTC 2026" KCFLAGS="-O3 -march=native -mtune=native -pipe" nice make -j16
+  KBUILD_BUILD_TIMESTAMP="Fri Jun 12 00:00:00 UTC 2026"  nice make -j16
   make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1 -j16
 }
 
